@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯净雪花特效</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #0a192f, #0c2a4a);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+        
+        button {
+            background: rgba(25, 80, 140, 0.4);
+            color: #c3ddff;
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            background: rgba(35, 100, 170, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button id="moreSnow">更多雪花</button>
+        <button id="lessSnow">减少雪花</button>
+        <button id="changeColor">变换背景</button>
+    </div>
+    
+    <canvas class="canvas"></canvas>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.querySelector('.canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 设置canvas大小为窗口大小
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 雪花数组
+            let snowflakes = [];
+            let snowflakeCount = 150;
+            let backgroundColorIndex = 0;
+            const backgroundColors = [
+                ['#0a192f', '#0c2a4a'],
+                ['#1a1a2e', '#16213e'],
+                ['#0f3460', '#1f1f30'],
+                ['#050517', '#1a1a2e'],
+                ['#1c0522', '#2d1b69'],
+                ['#011f4b', '#03396c']
+            ];
+            
+            // 创建雪花
+            function createSnowflakes() {
+                snowflakes = [];
+                for (let i = 0; i < snowflakeCount; i++) {
+                    snowflakes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 3 + 1,
+                        speed: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.5 + 0.3,
+                        sway: Math.random() * 1
+                    });
+                }
+            }
+            
+            // 绘制雪花
+            function drawSnowflakes() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                
+                for (let i = 0; i < snowflakes.length; i++) {
+                    const flake = snowflakes[i];
+                    
+                    ctx.moveTo(flake.x, flake.y);
+                    ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+                }
+                
+                ctx.fill();
+                
+                updateSnowflakes();
+                
+                requestAnimationFrame(drawSnowflakes);
+            }
+            
+            // 更新雪花位置
+            function updateSnowflakes() {
+                for (let i = 0; i < snowflakes.length; i++) {
+                    const flake = snowflakes[i];
+                    
+                    flake.y += flake.speed;
+                    flake.x += Math.sin(flake.sway) * 0.5;
+                    flake.sway += 0.01;
+                    
+                    if (flake.y > canvas.height) {
+                        flake.y = -flake.radius;
+                        flake.x = Math.random() * canvas.width;
+                    }
+                }
+            }
+            
+            // 窗口调整大小时重置canvas大小
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                createSnowflakes();
+            });
+            
+            // 控制按钮事件
+            document.getElementById('moreSnow').addEventListener('click', function() {
+                snowflakeCount = Math.min(400, snowflakeCount + 50);
+                createSnowflakes();
+            });
+            
+            document.getElementById('lessSnow').addEventListener('click', function() {
+                snowflakeCount = Math.max(50, snowflakeCount - 50);
+                createSnowflakes();
+            });
+            
+            document.getElementById('changeColor').addEventListener('click', function() {
+                backgroundColorIndex = (backgroundColorIndex + 1) % backgroundColors.length;
+                document.body.style.background = `linear-gradient(to bottom, ${backgroundColors[backgroundColorIndex][0]}, ${backgroundColors[backgroundColorIndex][1]})`;
+            });
+            
+            // 初始化并开始动画
+            createSnowflakes();
+            drawSnowflakes();
+        });
+    </script>
+</body>
+</html>
