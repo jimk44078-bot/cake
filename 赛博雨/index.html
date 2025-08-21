@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Matrix Rain for Notion</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      :root {
+        --clr: #2e8b57; /* 柔和的绿色 */
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #ffffff; /* 白色背景 */
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        height: 300px; /* 缩小容器高度 */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        animation: animateColor 8s linear infinite;
+        transform: scale(0.8); /* 整体缩小 */
+      }
+
+      @keyframes animateColor {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+
+      .container .cloud {
+        position: relative;
+        width: 250px; /* 缩小云宽度 */
+        z-index: 100;
+        filter: drop-shadow(0 0 20px var(--clr)); /* 减小阴影 */
+      }
+
+      .container .cloud h2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        color: #fff;
+        font-size: 1.6em; /* 缩小字体 */
+        z-index: 1000;
+        font-weight: 400;
+        padding: 0 8px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        background: var(--clr);
+      }
+
+      .container .cloud h2::before {
+        content: '';
+        position: absolute;
+        top: -90px; /* 调整位置 */
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 80px;
+        width: 110%;
+        height: 80px;
+        background: var(--clr);
+      }
+
+      .container .cloud h2::after {
+        content: '';
+        position: absolute;
+        top: -120px; /* 调整位置 */
+        left: 20px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--clr);
+        box-shadow: 100px -25px 0 8px var(--clr);
+      }
+
+      .container .cloud .drop {
+        position: absolute;
+        top: 50px; /* 调整位置 */
+        height: 16px;
+        line-height: 16px;
+        color: var(--clr);
+        transform-origin: bottom;
+        animation: animate 2s linear infinite;
+        font-size: 0.9em; /* 缩小字体 */
+      }
+
+      @keyframes animate {
+        0% {
+          transform: translateY(0) scaleY(0);
+          transform-origin: top;
+        }
+        10% {
+          transform: translateY(0) scaleY(0.25);
+          transform-origin: top;
+        }
+        20% {
+          transform: translateY(0) scaleY(1);
+        }
+
+        70% {
+          transform: translateY(250px) scaleY(1); /* 缩短下落距离 */
+          transform-origin: bottom;
+        }
+        80% {
+          transform: translateY(250px) scaleY(1);
+          transform-origin: bottom;
+        }
+        100% {
+          transform: translateY(250px) scaleY(0);
+          transform-origin: bottom;
+          text-shadow: -150px 0 0 var(--clr), 150px 0 var(--clr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cloud">
+        <h2>Matrix Rain</h2>
+      </div>
+    </div>
+
+    <script>
+      function randomText() {
+        var text = '!@#$%^*()';
+        letters = text[Math.floor(Math.random() * text.length)];
+        return letters;
+      }
+
+      function rain() {
+        let cloud = document.querySelector('.cloud');
+        let e = document.createElement('div');
+        e.classList.add('drop');
+        cloud.appendChild(e);
+
+        let left = Math.floor(Math.random() * 250); /* 调整范围 */
+        let size = Math.random() * 1.2; /* 减小大小变化 */
+        let duration = Math.random() * 0.8; /* 缩短持续时间 */
+
+        e.innerText = randomText();
+        e.style.left = left + 'px';
+        e.style.fontSize = (0.4 + size) + 'em';
+        e.style.animationDuration = (1 + duration) + 's';
+
+        setTimeout(function () {
+          cloud.removeChild(e);
+        }, 2000);
+      }
+
+      setInterval(function () {
+        rain();
+      }, 25); /* 调整生成频率 */
+    </script>
+  </body>
+</html>
