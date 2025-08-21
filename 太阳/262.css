@@ -1,0 +1,115 @@
+/* 设置body样式以实现居中布局和最小高度 */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3eeea;
+  overflow: hidden;
+}
+
+/* 定义太阳的样式，包括大小、形状和动画效果 */
+.sun {
+  position: relative;
+  width: 50vmin;
+  height: 50vmin;
+  border-radius: 100%;
+  background-color: #ebf259;
+  box-shadow: inset #f3eeea 0 0 0 7.1428571429vmin;
+  animation: shimmer 6s ease alternate infinite;
+}
+
+/* 定义太阳光线的基本样式，包括位置和变换属性 */
+.ray {
+  position: absolute;
+  top: 0;
+  left: 25vmin;
+  width: 1.25vmin;
+  height: 6.25vmin;
+  transform-origin: 0 25vmin;
+  transform: translateY(25vmin);
+  --rotate: 6deg;
+  --delay: -0.33s;
+  transform: rotate(var(--rotate));
+}
+/* 使用伪元素创建光线的层次效果，并设置动画 */
+.ray:before,
+.ray:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e36700;
+}
+.ray:before {
+  height: 20%;
+  border-radius: 100%;
+  transform-origin: 50% 0;
+  animation: flare 1.6s linear infinite;
+  animation-delay: var(--delay);
+}
+.ray:after {
+  height: 100%;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  animation: wave 0.8s linear alternate infinite;
+  animation-delay: var(--delay);
+}
+/* 为偶数光线设置不同的颜色 */
+.ray:nth-child(even):before,
+.ray:nth-child(even):after {
+  background-color: #e59a27;
+}
+/* 为每个第三光线设置独特的颜色 */
+.ray:nth-child(3n + 1):before,
+.ray:nth-child(3n + 1):after {
+  background-color: #f2c559;
+}
+
+/**
+   * wave动画关键帧定义
+   * 该动画通过调整元素的垂直缩放比例和位置，实现波浪效果
+   */
+@keyframes wave {
+  0% {
+    /* 初始状态：水平缩放比例为1，垂直缩放比例为0.5 */
+    transform: scale(1, 0.5);
+  }
+  50% {
+    /* 中间状态：水平缩放比例为1.2，垂直缩放比例为1.5，并且沿y轴向上移动5% */
+    transform: scale(1.2, 1.5) translateY(5%);
+  }
+  100% {
+    /* 结束状态：水平缩放比例为0.8，垂直缩放比例为2 */
+    transform: scale(0.8, 2);
+  }
+}
+
+/**
+   * flare动画关键帧定义
+   * 该动画通过调整元素的透明度和缩放比例，实现闪光效果
+   */
+@keyframes flare {
+  0% {
+    /* 初始状态：完全透明，缩放比例为0.2，并沿y轴向上移动一定距离 */
+    opacity: 0;
+    transform: scale(0.2) translateY(-4.1666666667vmin);
+  }
+  100% {
+    /* 结束状态：完全不透明，缩放比例为0.8，并沿y轴向上移动另一距离 */
+    opacity: 1;
+    transform: scale(0.8) translateY(-8.3333333333vmin);
+  }
+}
+
+/**
+   * shimmer动画关键帧定义
+   * 该动画通过轻微旋转和缩放元素，实现闪烁效果
+   */
+@keyframes shimmer {
+  to {
+    /* 结束状态：旋转5度，缩放比例为0.96 */
+    transform: rotate(5deg) scale(0.96);
+  }
+}
