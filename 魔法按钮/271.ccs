@@ -1,0 +1,39 @@
+/* 确保页面填满窗口 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  background: #222;
+}
+
+/* 中心按钮，比例过渡平滑 */
+#explosion-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  font-size: 18px;
+  font-family: sans-serif;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+/* 按钮激活时放大效果 */
+#explosion-button.active {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* 画布覆盖整个窗口，不会干扰点击 */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
