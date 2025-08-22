@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>睡觉的熊动画</title>
+  <style>
+    /* 设置 body 整体样式 */
+    body {
+      background-color: #EBD8D0;
+      text-align: center;
+      height: 100%;
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    #container {
+      margin: 0 auto;
+      position: relative;
+      height: 150px; /* 缩小高度 */
+      width: 480px;  /* 缩小宽度 */
+      transform: scale(0.65); /* 整体缩放 */
+      transform-origin: center;
+    }
+
+    #container div {
+      position: absolute;
+    }
+
+    #container div::before,
+    #container div::after {
+      content: '';
+      position: absolute;
+      display: block;
+    }
+
+    /* 头部 */
+    .head {
+      z-index: 10;
+      width: 98px; /* 缩小 */
+      height: 45px; /* 缩小 */
+      bottom: 20px; /* 调整位置 */
+      left: 92px; /* 调整位置 */
+      background: #A78A7F;
+      border-radius: 100%;
+    }
+
+    .head:before {
+      width: 79px; /* 缩小 */
+      height: 79px; /* 缩小 */
+      left: 35px; /* 调整位置 */
+      bottom: 0px;
+      z-index: 199;
+      background: #594a41;
+      border-radius: 90% 50% 90% 90%;
+      transform: rotateZ(226deg);
+    }
+
+    .muzzle {
+      z-index: 5;
+      width: 98px; /* 缩小 */
+      height: 45px; /* 缩小 */
+      bottom: 19px; /* 调整位置 */
+      left: 92px; /* 调整位置 */
+      background: #A78A7F;
+      border-radius: 100%;
+    }
+
+    /* 耳朵 */
+    .ears {
+      width: 27px; /* 缩小 */
+      height: 27px; /* 缩小 */
+      background: #594a41;
+      border-radius: 100%;
+      left: 142px; /* 调整位置 */
+      top: 39px; /* 调整位置 */
+      box-shadow: 22px -5px 0 0 #594a41; /* 调整阴影 */
+    }
+
+    /* 身体 */
+    .body {
+      width: 195px; /* 缩小 */
+      height: 98px; /* 缩小 */
+      background: #594a41;
+      left: 148px; /* 调整位置 */
+      border-radius: 50%;
+      bottom: 19px; /* 调整位置 */
+    }
+
+    /* 前腿 */
+    .paws-front {
+      z-index: 15;
+      background: #A78A7F;
+      width: 65px; /* 缩小 */
+      height: 32px; /* 缩小 */
+      bottom: 9px; /* 调整位置 */
+      left: 177px; /* 调整位置 */
+      border-radius: 80% 22% 55% 50% / 55% 22% 80% 50%;
+      transform: rotateZ(12deg);
+    }
+
+    /* 后腿 */
+    .paws-back {
+      width: 65px; /* 缩小 */
+      height: 34px; /* 缩小 */
+      border-top-left-radius: 100%;
+      background: #A78A7F;
+      left: 273px; /* 调整位置 */
+      bottom: 19px; /* 调整位置 */
+    }
+
+    .paws-back:after {
+      width: 23px; /* 缩小 */
+      height: 34px; /* 缩小 */
+      border-radius: 100%;
+      left: 52px; /* 调整位置 */
+      background: #A78A7F;
+    }
+
+    /* 鼻子、腮红 */
+    .details {
+      width: 16px; /* 缩小 */
+      height: 16px; /* 缩小 */
+      background: #221E22;
+      border-radius: 100%;
+      z-index: 20;
+      box-shadow: 65px 0 0 #AD5D4E; /* 调整阴影 */
+      bottom: 43px; /* 调整位置 */
+      left: 88px; /* 调整位置 */
+    }
+
+    /* 眼睛 */
+    .details:after {
+      width: 14px; /* 缩小 */
+      height: 14px; /* 缩小 */
+      border-bottom: 3px solid #221E22; /* 缩小 */
+      border-top: 3px solid transparent; /* 缩小 */
+      border-left: 3px solid transparent; /* 缩小 */
+      border-right: 3px solid transparent; /* 缩小 */
+      border-radius: 50%;
+      left: 44px; /* 调整位置 */
+      top: -19px; /* 调整位置 */
+    }
+
+    /* 尾巴 */
+    .tail {
+      width: 32px; /* 缩小 */
+      height: 32px; /* 缩小 */
+      background: #594a41;
+      border-radius: 100%;
+      left: 318px; /* 调整位置 */
+      top: 39px; /* 调整位置 */
+    }
+
+    /* 睡觉 zzz */
+    .sleep {
+      height: 58px; /* 缩小 */
+      width: 52px; /* 缩小 */
+      position: absolute;
+      left: 52px; /* 调整位置 */
+      top: 19px; /* 调整位置 */
+      font-size: 36px; /* 缩小 */
+    }
+
+    .sleep span {
+      width: 10px; /* 缩小 */
+      height: 10px; /* 缩小 */
+      display: block;
+      font-family: arial;
+      font-weight: bold;
+      text-align: center;
+      line-height: 13px; /* 调整 */
+      background: #221E22;
+      animation: zz 3s linear infinite;
+    }
+
+    .sleep .s1 {
+      margin-left: 117px; /* 调整 */
+      margin-top: -26px; /* 调整 */
+    }
+
+    .sleep .s2 {
+      margin-left: 78px; /* 调整 */
+      margin-top: -3px; /* 调整 */
+    }
+
+    .sleep .s3 {
+      margin-left: 39px; /* 调整 */
+      margin-top: 3px; /* 调整 */
+    }
+
+    .sleep .s4 {
+      margin-left: 0px;
+      margin-top: 8px; /* 调整 */
+    }
+
+    .sleep .s5 {
+      margin-left: -3px; /* 调整 */
+      margin-top: 34px; /* 调整 */
+    }
+
+    @keyframes zz {
+      0% {
+        opacity: 0;
+        transform: scale3d(.2, .2, .2) rotate(-20deg);
+      }
+      50% {
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-20px) translateX(13px) rotate(10deg); /* 调整 */
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div class="head"></div>
+    <div class="muzzle"></div>
+    <div class="ears"></div>
+    <div class="body"></div>
+    <div class="paws-front"></div>
+    <div class="paws-back"></div>
+    <div class="details"></div>
+    <div class="tail"></div>
+
+    <!-- zzz -->
+    <div class="sleep">
+      <span class="s1">z</span>
+      <span class="s2">z</span>
+      <span class="s3">z</span>
+      <span class="s4">z</span>
+      <span class="s5">z</span>
+    </div>
+  </div>
+</body>
+</html>
