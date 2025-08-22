@@ -13,7 +13,8 @@
       }
 
       :root {
-        --clr: #2e8b57; /* 柔和的绿色 */
+        --clr: #00ff41; /* 更亮的矩阵绿色 */
+        --clr-secondary: #00cc33; /* 辅助绿色 */
       }
 
       body {
@@ -21,23 +22,23 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: #ffffff; /* 默认白色背景 */
+        background: #ffffff;
         overflow: hidden;
         transition: background 0.5s ease;
       }
 
       body.dark-mode {
-        background: #000000; /* 黑色背景 */
+        background: #0a0a0a; /* 深灰背景替代纯黑，提高对比度 */
       }
 
       .container {
         position: relative;
-        height: 300px; /* 保持原有高度 */
+        height: 400px; /* 增加高度以容纳更长的雨滴 */
         width: 100%;
         display: flex;
         justify-content: center;
         animation: animateColor 8s linear infinite;
-        transform: scale(0.6); /* 缩小整体比例 */
+        transform: scale(0.6);
       }
 
       @keyframes animateColor {
@@ -51,9 +52,9 @@
 
       .container .cloud {
         position: relative;
-        width: 160px; /* 缩小云宽度 */
+        width: 160px;
         z-index: 100;
-        filter: drop-shadow(0 0 12px var(--clr)); /* 减小阴影 */
+        filter: drop-shadow(0 0 15px var(--clr)); /* 增强阴影效果 */
       }
 
       .container .cloud h2 {
@@ -62,19 +63,20 @@
         transform: translateX(-50%);
         white-space: nowrap;
         color: #fff;
-        font-size: 1.2em; /* 缩小字体 */
+        font-size: 1.2em;
         z-index: 1000;
         font-weight: 400;
         padding: 0 5px;
         border-radius: 5px;
         text-transform: uppercase;
         background: var(--clr);
+        text-shadow: 0 0 5px rgba(0, 255, 65, 0.8); /* 添加文字发光效果 */
       }
 
       .container .cloud h2::before {
         content: '';
         position: absolute;
-        top: -55px; /* 调整位置 */
+        top: -55px;
         left: 50%;
         transform: translateX(-50%);
         border-radius: 50px;
@@ -86,7 +88,7 @@
       .container .cloud h2::after {
         content: '';
         position: absolute;
-        top: -75px; /* 调整位置 */
+        top: -75px;
         left: 12px;
         width: 65px;
         height: 65px;
@@ -97,13 +99,15 @@
 
       .container .cloud .drop {
         position: absolute;
-        top: 35px; /* 调整位置 */
-        height: 12px;
-        line-height: 12px;
+        top: 35px;
+        height: 25px; /* 增加高度使雨滴更大 */
+        line-height: 25px;
         color: var(--clr);
         transform-origin: bottom;
-        animation: animate 2s linear infinite;
-        font-size: 0.7em; /* 缩小字体 */
+        animation: animate 3.5s linear infinite; /* 减慢动画速度 */
+        font-size: 0.9em; /* 增大字体大小 */
+        text-shadow: 0 0 5px var(--clr), 0 0 10px var(--clr); /* 增强文字发光效果 */
+        font-weight: 500;
       }
 
       @keyframes animate {
@@ -120,61 +124,67 @@
         }
 
         70% {
-          transform: translateY(300px) scaleY(1); /* 保持原有下落距离 */
+          transform: translateY(400px) scaleY(1); /* 增加下落距离 */
           transform-origin: bottom;
         }
         80% {
-          transform: translateY(300px) scaleY(1);
+          transform: translateY(400px) scaleY(1);
           transform-origin: bottom;
         }
         100% {
-          transform: translateY(300px) scaleY(0);
+          transform: translateY(400px) scaleY(0);
           transform-origin: bottom;
           text-shadow: -180px 0 0 var(--clr), 180px 0 var(--clr);
         }
       }
 
-      /* 更小的主题切换按钮 */
+      /* 更小更精美的主题切换按钮 */
       .theme-toggle {
         position: fixed;
-        top: 12px;
-        right: 12px;
-        width: 36px;
-        height: 36px;
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        background: linear-gradient(145deg, #f9d71c, #ffea70);
-        border: 1.5px solid rgba(255, 255, 255, 0.8);
+        background: #f9d71c; /* 使用纯色替代渐变 */
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         overflow: hidden;
       }
 
       .theme-toggle:hover {
-        transform: scale(1.1) rotate(15deg);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.15) rotate(15deg);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
       }
 
       .theme-toggle::before {
-        content: "☀️";
-        font-size: 18px;
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: #f9d71c; /* 使用与按钮相同的颜色 */
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         transition: all 0.3s ease;
-        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.8));
       }
 
       body.dark-mode .theme-toggle {
-        background: linear-gradient(145deg, #2b2b2b, #4a4a4a);
-        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        background: #3a3a3a;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
       }
 
       body.dark-mode .theme-toggle::before {
         content: "🌙";
-        font-size: 16px;
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+        font-size: 13px;
+        background: none;
+        box-shadow: none;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
       }
 
       /* 添加光晕效果 */
@@ -185,7 +195,7 @@
         height: 100%;
         border-radius: 50%;
         background: transparent;
-        box-shadow: 0 0 8px rgba(249, 215, 28, 0.6);
+        box-shadow: 0 0 10px rgba(249, 215, 28, 0.7);
         opacity: 0;
         transition: opacity 0.3s ease;
       }
@@ -195,7 +205,7 @@
       }
 
       body.dark-mode .theme-toggle::after {
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
       }
     </style>
   </head>
@@ -211,7 +221,8 @@
 
     <script>
       function randomText() {
-        var text = '!@#$%^*()';
+        // 只保留特殊字符，删除英文字母
+        var text = '!~#￥%……&*--·+=<>/?\\|{}[]()@$^';
         letters = text[Math.floor(Math.random() * text.length)];
         return letters;
       }
@@ -223,17 +234,16 @@
         cloud.appendChild(e);
 
         let left = Math.floor(Math.random() * 160);
-        let size = Math.random() * 0.9;
-        let duration = Math.random() * 0.8;
+        let size = Math.random() * 1.2; // 增加大小变化范围
 
         e.innerText = randomText();
         e.style.left = left + 'px';
-        e.style.fontSize = (0.25 + size) + 'em';
-        e.style.animationDuration = (1 + duration) + 's';
+        e.style.fontSize = (0.6 + size) + 'em'; // 增大字体变化范围
+        e.style.animationDuration = (2 + Math.random() * 2) + 's'; // 减慢速度并增加变化
 
         setTimeout(function () {
           cloud.removeChild(e);
-        }, 2000);
+        }, 4000); // 增加移除时间以匹配更慢的动画
       }
 
       // 主题切换功能
@@ -242,7 +252,7 @@
         document.body.classList.toggle('dark-mode');
         
         // 添加点击动画效果
-        themeToggle.style.transform = 'scale(0.95)';
+        themeToggle.style.transform = 'scale(0.9)';
         setTimeout(() => {
           themeToggle.style.transform = '';
         }, 200);
@@ -250,7 +260,7 @@
 
       setInterval(function () {
         rain();
-      }, 35); /* 调整生成频率 */
+      }, 60); /* 降低生成频率以匹配更慢的速度 */
     </script>
   </body>
 </html>
