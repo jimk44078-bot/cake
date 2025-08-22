@@ -100,12 +100,11 @@
       .container .cloud .drop {
         position: absolute;
         top: 35px;
-        height: 25px; /* 增加高度使雨滴更大 */
-        line-height: 25px;
+        height: 20px; /* 增加高度使雨滴更长 */
+        line-height: 20px;
         color: var(--clr);
         transform-origin: bottom;
         animation: animate 3.5s linear infinite; /* 减慢动画速度 */
-        font-size: 0.9em; /* 增大字体大小 */
         text-shadow: 0 0 5px var(--clr), 0 0 10px var(--clr); /* 增强文字发光效果 */
         font-weight: 500;
       }
@@ -138,53 +137,63 @@
         }
       }
 
-      /* 更小更精美的主题切换按钮 */
+      /* 优化太阳按钮 - 完全重新设计 */
       .theme-toggle {
         position: fixed;
         top: 10px;
         right: 10px;
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
-        background: #f9d71c; /* 使用纯色替代渐变 */
-        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        background: transparent;
+        border: none;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         overflow: hidden;
+        padding: 0;
       }
 
       .theme-toggle:hover {
         transform: scale(1.15) rotate(15deg);
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
       }
 
-      .theme-toggle::before {
-        content: "";
-        display: block;
-        width: 20px;
-        height: 20px;
-        background: #f9d71c; /* 使用与按钮相同的颜色 */
+      .theme-toggle .sun-icon {
+        width: 100%;
+        height: 100%;
+        background: url('https://img.tukuppt.com/png_preview/00/03/96/wmoLPjOk4X.jpg') center/cover no-repeat;
         border-radius: 50%;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
         transition: all 0.3s ease;
       }
 
-      body.dark-mode .theme-toggle {
-        background: #3a3a3a;
-        border: 1.5px solid rgba(255, 255, 255, 0.3);
+      body.dark-mode .theme-toggle .sun-icon {
+        opacity: 0;
+        transform: scale(0) rotate(90deg);
       }
 
-      body.dark-mode .theme-toggle::before {
-        content: "🌙";
-        font-size: 13px;
-        background: none;
-        box-shadow: none;
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+      .theme-toggle .moon-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        opacity: 0;
+        transform: scale(0) rotate(-90deg);
+        transition: all 0.3s ease;
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+      }
+
+      body.dark-mode .theme-toggle .moon-icon {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
       }
 
       /* 添加光晕效果 */
@@ -195,9 +204,10 @@
         height: 100%;
         border-radius: 50%;
         background: transparent;
-        box-shadow: 0 0 10px rgba(249, 215, 28, 0.7);
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         opacity: 0;
         transition: opacity 0.3s ease;
+        z-index: -1;
       }
 
       .theme-toggle:hover::after {
@@ -205,13 +215,16 @@
       }
 
       body.dark-mode .theme-toggle::after {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
       }
     </style>
   </head>
   <body>
     <!-- 主题切换按钮 -->
-    <button class="theme-toggle" aria-label="切换主题"></button>
+    <button class="theme-toggle" aria-label="切换主题">
+      <div class="sun-icon"></div>
+      <div class="moon-icon">🌙</div>
+    </button>
     
     <div class="container">
       <div class="cloud">
@@ -221,10 +234,20 @@
 
     <script>
       function randomText() {
-        // 只保留特殊字符，删除英文字母
-        var text = '!~#￥%……&*--·+=<>/?\\|{}[]()@$^';
-        letters = text[Math.floor(Math.random() * text.length)];
-        return letters;
+        // 删除()|!字符，增加@￥#%&出现频率
+        var highFreqChars = '@￥#%&'; // 高频字符
+        var otherChars = '$^+-=<>?~`'; // 其他字符
+        var numbers = '0123456789';
+        
+        // 70% 高频字符, 20% 其他字符, 10% 数字
+        var rand = Math.random();
+        if (rand < 0.7) {
+          return highFreqChars[Math.floor(Math.random() * highFreqChars.length)];
+        } else if (rand < 0.9) {
+          return otherChars[Math.floor(Math.random() * otherChars.length)];
+        } else {
+          return numbers[Math.floor(Math.random() * numbers.length)];
+        }
       }
 
       function rain() {
@@ -234,12 +257,12 @@
         cloud.appendChild(e);
 
         let left = Math.floor(Math.random() * 160);
-        let size = Math.random() * 1.2; // 增加大小变化范围
+        let size = 0.8 + Math.random() * 0.6; // 水滴大小 0.8em - 1.4em
 
         e.innerText = randomText();
         e.style.left = left + 'px';
-        e.style.fontSize = (0.6 + size) + 'em'; // 增大字体变化范围
-        e.style.animationDuration = (2 + Math.random() * 2) + 's'; // 减慢速度并增加变化
+        e.style.fontSize = size + 'em'; // 设置字体大小
+        e.style.animationDuration = (2 + Math.random() * 2) + 's'; // 随机速度
 
         setTimeout(function () {
           cloud.removeChild(e);
