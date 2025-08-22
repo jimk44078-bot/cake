@@ -21,18 +21,23 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: #ffffff; /* 白色背景 */
+        background: #ffffff; /* 默认白色背景 */
         overflow: hidden;
+        transition: background 0.5s ease;
+      }
+
+      body.dark-mode {
+        background: #000000; /* 黑色背景 */
       }
 
       .container {
         position: relative;
-        height: 300px; /* 缩小容器高度 */
+        height: 220px; /* 进一步缩小容器高度 */
         width: 100%;
         display: flex;
         justify-content: center;
         animation: animateColor 8s linear infinite;
-        transform: scale(0.8); /* 整体缩小 */
+        transform: scale(0.7); /* 进一步缩小整体比例 */
       }
 
       @keyframes animateColor {
@@ -46,9 +51,9 @@
 
       .container .cloud {
         position: relative;
-        width: 250px; /* 缩小云宽度 */
+        width: 200px; /* 进一步缩小云宽度 */
         z-index: 100;
-        filter: drop-shadow(0 0 20px var(--clr)); /* 减小阴影 */
+        filter: drop-shadow(0 0 15px var(--clr)); /* 减小阴影 */
       }
 
       .container .cloud h2 {
@@ -57,11 +62,11 @@
         transform: translateX(-50%);
         white-space: nowrap;
         color: #fff;
-        font-size: 1.6em; /* 缩小字体 */
+        font-size: 1.4em; /* 进一步缩小字体 */
         z-index: 1000;
         font-weight: 400;
-        padding: 0 8px;
-        border-radius: 8px;
+        padding: 0 6px;
+        border-radius: 6px;
         text-transform: uppercase;
         background: var(--clr);
       }
@@ -69,36 +74,36 @@
       .container .cloud h2::before {
         content: '';
         position: absolute;
-        top: -90px; /* 调整位置 */
+        top: -70px; /* 调整位置 */
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 80px;
+        border-radius: 60px;
         width: 110%;
-        height: 80px;
+        height: 60px;
         background: var(--clr);
       }
 
       .container .cloud h2::after {
         content: '';
         position: absolute;
-        top: -120px; /* 调整位置 */
-        left: 20px;
-        width: 100px;
-        height: 100px;
+        top: -90px; /* 调整位置 */
+        left: 15px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         background: var(--clr);
-        box-shadow: 100px -25px 0 8px var(--clr);
+        box-shadow: 80px -20px 0 6px var(--clr);
       }
 
       .container .cloud .drop {
         position: absolute;
-        top: 50px; /* 调整位置 */
-        height: 16px;
-        line-height: 16px;
+        top: 40px; /* 调整位置 */
+        height: 14px;
+        line-height: 14px;
         color: var(--clr);
         transform-origin: bottom;
         animation: animate 2s linear infinite;
-        font-size: 0.9em; /* 缩小字体 */
+        font-size: 0.8em; /* 进一步缩小字体 */
       }
 
       @keyframes animate {
@@ -115,22 +120,89 @@
         }
 
         70% {
-          transform: translateY(250px) scaleY(1); /* 缩短下落距离 */
+          transform: translateY(180px) scaleY(1); /* 缩短下落距离 */
           transform-origin: bottom;
         }
         80% {
-          transform: translateY(250px) scaleY(1);
+          transform: translateY(180px) scaleY(1);
           transform-origin: bottom;
         }
         100% {
-          transform: translateY(250px) scaleY(0);
+          transform: translateY(180px) scaleY(0);
           transform-origin: bottom;
-          text-shadow: -150px 0 0 var(--clr), 150px 0 var(--clr);
+          text-shadow: -120px 0 0 var(--clr), 120px 0 var(--clr);
         }
+      }
+
+      /* 改进的主题切换按钮样式 */
+      .theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #f9d71c, #ffea70);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        overflow: hidden;
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1) rotate(15deg);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .theme-toggle::before {
+        content: "☀️";
+        font-size: 22px;
+        transition: all 0.4s ease;
+        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.8));
+      }
+
+      body.dark-mode .theme-toggle {
+        background: linear-gradient(145deg, #2b2b2b, #4a4a4a);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      body.dark-mode .theme-toggle::before {
+        content: "🌙";
+        font-size: 20px;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+      }
+
+      /* 添加光晕效果 */
+      .theme-toggle::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: 0 0 10px rgba(249, 215, 28, 0.6);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .theme-toggle:hover::after {
+        opacity: 1;
+      }
+
+      body.dark-mode .theme-toggle::after {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
       }
     </style>
   </head>
   <body>
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" aria-label="切换主题"></button>
+    
     <div class="container">
       <div class="cloud">
         <h2>Matrix Rain</h2>
@@ -150,13 +222,13 @@
         e.classList.add('drop');
         cloud.appendChild(e);
 
-        let left = Math.floor(Math.random() * 250); /* 调整范围 */
-        let size = Math.random() * 1.2; /* 减小大小变化 */
-        let duration = Math.random() * 0.8; /* 缩短持续时间 */
+        let left = Math.floor(Math.random() * 200);
+        let size = Math.random() * 1.0;
+        let duration = Math.random() * 0.8;
 
         e.innerText = randomText();
         e.style.left = left + 'px';
-        e.style.fontSize = (0.4 + size) + 'em';
+        e.style.fontSize = (0.3 + size) + 'em';
         e.style.animationDuration = (1 + duration) + 's';
 
         setTimeout(function () {
@@ -164,9 +236,21 @@
         }, 2000);
       }
 
+      // 主题切换功能
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        // 添加点击动画效果
+        themeToggle.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          themeToggle.style.transform = '';
+        }, 200);
+      });
+
       setInterval(function () {
         rain();
-      }, 25); /* 调整生成频率 */
+      }, 30); /* 调整生成频率 */
     </script>
   </body>
 </html>
