@@ -6,7 +6,7 @@
   <style>
     /* 设置 body 整体样式 */
     body {
-      background-color: #EBD8D0;
+      background-color: #FFFFFF; /* 改为白色背景 */
       text-align: center;
       height: 100%;
       margin: 0px;
@@ -20,9 +20,9 @@
     #container {
       margin: 0 auto;
       position: relative;
-      height: 100px; /* 进一步缩小高度 */
-      width: 320px;  /* 进一步缩小宽度 */
-      transform: scale(0.5); /* 进一步整体缩放 */
+      height: 60px;
+      width: 190px;
+      transform: scale(0.3);
       transform-origin: center;
     }
 
@@ -40,18 +40,18 @@
     /* 头部 */
     .head {
       z-index: 10;
-      width: 65px;
-      height: 30px;
-      bottom: 13px;
-      left: 61px;
+      width: 39px;
+      height: 18px;
+      bottom: 8px;
+      left: 37px;
       background: #A78A7F;
       border-radius: 100%;
     }
 
     .head:before {
-      width: 53px;
-      height: 53px;
-      left: 23px;
+      width: 32px;
+      height: 32px;
+      left: 14px;
       bottom: 0px;
       z-index: 199;
       background: #594a41;
@@ -61,145 +61,145 @@
 
     .muzzle {
       z-index: 5;
-      width: 65px;
-      height: 30px;
-      bottom: 13px;
-      left: 61px;
+      width: 39px;
+      height: 18px;
+      bottom: 8px;
+      left: 37px;
       background: #A78A7F;
       border-radius: 100%;
     }
 
     /* 耳朵 */
     .ears {
-      width: 18px;
-      height: 18px;
+      width: 11px;
+      height: 11px;
       background: #594a41;
       border-radius: 100%;
-      left: 95px;
-      top: 26px;
-      box-shadow: 15px -3px 0 0 #594a41;
+      left: 57px;
+      top: 16px;
+      box-shadow: 9px -2px 0 0 #594a41;
     }
 
     /* 身体 */
     .body {
-      width: 130px;
-      height: 65px;
+      width: 78px;
+      height: 39px;
       background: #594a41;
-      left: 99px;
+      left: 59px;
       border-radius: 50%;
-      bottom: 13px;
+      bottom: 8px;
     }
 
     /* 前腿 */
     .paws-front {
       z-index: 15;
       background: #A78A7F;
-      width: 43px;
-      height: 22px;
-      bottom: 6px;
-      left: 118px;
+      width: 26px;
+      height: 13px;
+      bottom: 4px;
+      left: 71px;
       border-radius: 80% 22% 55% 50% / 55% 22% 80% 50%;
       transform: rotateZ(12deg);
     }
 
     /* 后腿 */
     .paws-back {
-      width: 43px;
-      height: 22px;
+      width: 26px;
+      height: 13px;
       border-top-left-radius: 100%;
       background: #A78A7F;
-      left: 182px;
-      bottom: 13px;
+      left: 109px;
+      bottom: 8px;
     }
 
     .paws-back:after {
-      width: 15px;
-      height: 22px;
+      width: 9px;
+      height: 13px;
       border-radius: 100%;
-      left: 35px;
+      left: 21px;
       background: #A78A7F;
     }
 
     /* 鼻子、腮红 */
     .details {
-      width: 11px;
-      height: 11px;
+      width: 7px;
+      height: 7px;
       background: #221E22;
       border-radius: 100%;
       z-index: 20;
-      box-shadow: 43px 0 0 #AD5D4E;
-      bottom: 29px;
-      left: 59px;
+      box-shadow: 26px 0 0 #AD5D4E;
+      bottom: 17px;
+      left: 35px;
     }
 
     /* 眼睛 */
     .details:after {
-      width: 9px;
-      height: 9px;
-      border-bottom: 2px solid #221E22;
-      border-top: 2px solid transparent;
-      border-left: 2px solid transparent;
-      border-right: 2px solid transparent;
+      width: 5px;
+      height: 5px;
+      border-bottom: 1px solid #221E22;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
       border-radius: 50%;
-      left: 29px;
-      top: -13px;
+      left: 17px;
+      top: -8px;
     }
 
     /* 尾巴 */
     .tail {
-      width: 21px;
-      height: 21px;
+      width: 13px;
+      height: 13px;
       background: #594a41;
       border-radius: 100%;
-      left: 212px;
-      top: 26px;
+      left: 127px;
+      top: 16px;
     }
 
     /* 睡觉 zzz */
     .sleep {
-      height: 39px;
-      width: 35px;
+      height: 23px;
+      width: 21px;
       position: absolute;
-      left: 35px;
-      top: 13px;
-      font-size: 24px;
+      left: 21px;
+      top: 8px;
+      font-size: 14px;
     }
 
     .sleep span {
-      width: 7px;
-      height: 7px;
+      width: 4px;
+      height: 4px;
       display: block;
       font-family: arial;
       font-weight: bold;
       text-align: center;
-      line-height: 9px;
+      line-height: 5px;
       background: #221E22;
       animation: zz 3s linear infinite;
     }
 
     .sleep .s1 {
-      margin-left: 78px;
-      margin-top: -17px;
+      margin-left: 47px;
+      margin-top: -10px;
     }
 
     .sleep .s2 {
-      margin-left: 52px;
-      margin-top: -2px;
+      margin-left: 31px;
+      margin-top: -1px;
     }
 
     .sleep .s3 {
-      margin-left: 26px;
-      margin-top: 2px;
+      margin-left: 16px;
+      margin-top: 1px;
     }
 
     .sleep .s4 {
       margin-left: 0px;
-      margin-top: 5px;
+      margin-top: 3px;
     }
 
     .sleep .s5 {
-      margin-left: -2px;
-      margin-top: 23px;
+      margin-left: -1px;
+      margin-top: 14px;
     }
 
     @keyframes zz {
@@ -211,7 +211,7 @@
         opacity: 1;
       }
       80% {
-        transform: translateY(-13px) translateX(9px) rotate(10deg);
+        transform: translateY(-8px) translateX(5px) rotate(10deg);
         opacity: 0;
       }
       100% {
