@@ -137,20 +137,22 @@
         }
       }
 
-      /* 优化太阳按钮 - 完全重新设计 */
+      /* 右下角半透明按钮 */
       .theme-toggle {
         position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 26px;
-        height: 26px;
+        bottom: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        background: transparent;
-        border: none;
+        background: rgba(255, 255, 255, 0.7); /* 半透明背景 */
+        backdrop-filter: blur(5px); /* 毛玻璃效果 */
+        border: 1px solid rgba(255, 255, 255, 0.5);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         z-index: 1000;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         overflow: hidden;
@@ -159,15 +161,17 @@
 
       .theme-toggle:hover {
         transform: scale(1.15) rotate(15deg);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
       .theme-toggle .sun-icon {
-        width: 100%;
-        height: 100%;
+        width: 20px;
+        height: 20px;
         background: url('https://img.tukuppt.com/png_preview/00/03/96/wmoLPjOk4X.jpg') center/cover no-repeat;
         border-radius: 50%;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
         transition: all 0.3s ease;
+        opacity: 0.9;
       }
 
       body.dark-mode .theme-toggle .sun-icon {
@@ -177,23 +181,23 @@
 
       .theme-toggle .moon-icon {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0) rotate(-90deg);
+        font-size: 16px;
         opacity: 0;
-        transform: scale(0) rotate(-90deg);
         transition: all 0.3s ease;
-        text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+      }
+
+      body.dark-mode .theme-toggle {
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       body.dark-mode .theme-toggle .moon-icon {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
       }
 
       /* 添加光晕效果 */
@@ -204,18 +208,18 @@
         height: 100%;
         border-radius: 50%;
         background: transparent;
-        box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: -1;
       }
 
       .theme-toggle:hover::after {
-        opacity: 1;
+        opacity: 0.6;
       }
 
       body.dark-mode .theme-toggle::after {
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
       }
     </style>
   </head>
