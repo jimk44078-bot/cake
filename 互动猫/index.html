@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- * Icon * -->
+  <link rel="icon" href="images/icon.png">
+  <!-- css -->
+  <link rel="stylesheet" href="style.css">
+  <!-- * Font * -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <!-- * Manifest * -->
+  <link rel="manifest" href="site.webmanifest">
+  <title>Talking Cat</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- * Header con logo * -->
+    <header>
+      <img src="images/logo.png" alt="coding week logo">
+    </header>
+
+    <!-- * Contenuto principale * -->
+    <main>
+      <!-- * Textarea * -->
+      <textarea class="mt-5 mb-5" name="text" id="text" placeholder="Scrivi qui..."></textarea>
+
+      <!-- * Controlli * -->
+      <div class="controls mb-5">
+        <!-- * Play Button * -->
+        <button><img src="images/play.png" alt="play"></button>
+
+        <!-- * Tono * -->
+        <div class="pitch-controls">
+          <label for="pitch" class="mb-2">Pitch</label>
+          <input type="range" name="pitch" id="pitch" min="0.1" max="2" step="0.1">
+        </div>
+      </div>
+
+      <!-- * Gattino * -->
+      <figure>
+        <img class="static-cat" src="images/static-cat.png" alt="static cat">
+        <img class="animated-cat" src="images/animated-cat.gif" alt="animated-cat">
+      </figure>
+    </main>
+  </div>
+
+  <!-- * Script JS * -->
+  <script src="script.js"></script>
+</body>
+
+</html>
